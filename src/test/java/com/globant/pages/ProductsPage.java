@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ProductsPage {
-    private static final Logger log = LoggerFactory.getLogger(ProductsPage.class);
     WebDriver driver;
 
     public WebDriver getDriver() {
