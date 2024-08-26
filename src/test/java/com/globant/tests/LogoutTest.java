@@ -35,15 +35,13 @@ public class LogoutTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    @Test
+    @Test(description = "Verify that when logout, this redirect correctly to login")
     public void verifyLogoutRedirectLogin() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         productsPage = new ProductsPage(driver);
 
-        // Espera a que el botón del menú hamburguesa sea visible y clickeable
         WebElement burgerMenuBtn = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getBurgerMenuBtn()));
         burgerMenuBtn.click();
-        // Espera a que el enlace de logout sea visible y clickeable
         WebElement logoutSidebarLink = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getLogoutSidebarLink()));
         logoutSidebarLink.click();
 

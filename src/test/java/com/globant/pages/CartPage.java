@@ -10,7 +10,6 @@ import java.util.List;
 public class CartPage {
     private WebDriver driver;
 
-    // Inicializamos el driver
     public CartPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -28,10 +27,6 @@ public class CartPage {
 
     public WebElement getCheckoutBtn() {
         return this.checkoutBtn;
-    }
-
-    public void setCheckoutBtn(WebElement checkoutBtn) {
-        this.checkoutBtn = checkoutBtn;
     }
 
     public void removeAllProducts(){

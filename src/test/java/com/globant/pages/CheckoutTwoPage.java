@@ -17,7 +17,6 @@ public class CheckoutTwoPage {
         return finishBtn;
     }
 
-
     @FindBy(id = "finish")
     private WebElement finishBtn;
 

@@ -1,9 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="example test suite" verbose="1">
-    <test name="buy prodcut test">
+    <parameter name="username" value="standard_user"></parameter>
+    <parameter name="password" value="secret_sauce"></parameter>
+    <test name="login test">
         <classes>
-            <class name="com.globant.tests.BuyProductTest"></class>
+            <class name="com.globant.tests.LoginTest"></class>
         </classes>
     </test>
     <test name="logout test">
@@ -11,8 +13,15 @@
             <class name="com.globant.tests.LogoutTest"></class>
         </classes>
     </test>
-
-    <test name="delete product">
+    <parameter name="firstName" value="Juan Jose"></parameter>
+    <parameter name="lastName" value="Higuita"></parameter>
+    <parameter name="postalCode" value="050060"></parameter>
+    <test name="buy prodcut test">
+        <classes>
+            <class name="com.globant.tests.BuyProductTest"></class>
+        </classes>
+    </test>
+    <test name="delete product test">
         <classes>
             <class name="com.globant.tests.DeleteProductsTest"></class>
         </classes>

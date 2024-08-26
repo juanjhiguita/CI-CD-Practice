@@ -41,12 +41,11 @@ public class DeleteProductsTest {
 
     }
 
-    @Test
+    @Test(description = "Add 3 products in the empty cart and delete all and check if the delete is successful")
     public void deleteProcessIsSuccesfull() throws InterruptedException {
+        log.info("Test Start");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-
-        //SE AGREGAN LOS TRES PRODUCTOS AL CARRITO
-
+        // Adding 3 products to the car
         WebElement addToCartBtn1 = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getAddToCartBtn1()));
         addToCartBtn1.click();
         WebElement addToCartBtn2 = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getAddToCartBtn2()));
@@ -54,21 +53,17 @@ public class DeleteProductsTest {
         WebElement addToCartBtn3 = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getAddToCartBtn3()));
         addToCartBtn3.click();
 
-
-        // SE ABRE EL CARRITO
+        // Open the cart when click in the shoppyCartMenu
         WebElement shoppyCartMenu = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getShoppyCartMenu()));
         shoppyCartMenu.click();
 
         cartPage = new CartPage(driver);
-        // SE VERIFICA QUE SI SE HAYAN AGREGADO 3 PRODUCTOS ANTES DE ELIMINARLOS
+        // Verify that are 3 products in the cart
         Assert.assertEquals(3,cartPage.getCartProductsRemoveBtns().size());
-
-        // SE REMUEVEN LOS PRODUCTOS DEL CARRITO
         cartPage.removeAllProducts();
-
-        // SE VERIFICA QUE SI SE HAYA ELIMINADO
+        // Verify that the cart is empty
         Assert.assertEquals(0,cartPage.getCartProductsRemoveBtns().size());
-
+        log.info("Test Finish");
     }
 
     @AfterTest

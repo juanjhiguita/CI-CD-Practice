@@ -16,7 +16,6 @@ public class ProductsPage {
         this.driver = driver;
     }
 
-    // Inicializamos el driver
     public ProductsPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -57,33 +56,11 @@ public class ProductsPage {
         return this.burgerMenuBtn;
     }
 
-    public void setBurgerMenuBtn(WebElement burgerMenuBtn) {
-        this.burgerMenuBtn = burgerMenuBtn;
-    }
-
     public WebElement getShoppyCartMenu() {
         return this.shoppyCartMenu;
     }
 
-
     public WebElement getLogoutSidebarLink() {
         return this.logoutSidebarLink;
-    }
-
-    public void setLogoutSidebarLink(WebElement logoutSidebarLink) {
-        this.logoutSidebarLink = logoutSidebarLink;
-    }
-
-    public void clickBurguerMenu(){
-        this.burgerMenuBtn.click();
-    }
-
-
-    public void clickLogout(){
-        this.logoutSidebarLink.click();
-    }
-
-    public void clickShoppyCartMenu(){
-        this.shoppyCartMenu.click();
     }
 }

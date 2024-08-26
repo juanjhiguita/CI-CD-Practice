@@ -9,7 +9,6 @@ public class LoginPage {
 
     private WebDriver driver;
 
-    // Inicializamos el driver
     public LoginPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -49,14 +48,10 @@ public class LoginPage {
         this.loginBtn.click();
     }
 
+    // Method to call login process in other classes
     public void login(String username, String password){
         this.usernameTxt.sendKeys(username);
         this.passwordTxt.sendKeys(password);
         this.loginBtn.click();
     }
-
-
-
-
-
 }

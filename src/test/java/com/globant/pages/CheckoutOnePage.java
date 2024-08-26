@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 public class CheckoutOnePage {
     private WebDriver driver;
 
-    // Inicializamos el driver
     public CheckoutOnePage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -23,7 +22,7 @@ public class CheckoutOnePage {
     @FindBy(id = "postal-code")
     private WebElement postalCodeField;
 
-    @FindBy(id = "continue")
+    @FindBy(css = "#continue")
     private WebElement continueBtn;
 
     public WebElement getFirstNameField() {
