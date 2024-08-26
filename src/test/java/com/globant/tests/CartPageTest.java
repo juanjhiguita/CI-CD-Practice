@@ -23,6 +23,7 @@ public class CartPageTest {
     private CartPage cartPage;
     private CheckoutTwoPage checkoutTwoPage;
     private CheckoutCompletePage checkoutCompletePage;
+    private ProductsPage productsPage;
 
     private final Logger log = Logger.getLogger(String.valueOf(ProductsPageTest.class));
 
@@ -35,14 +36,13 @@ public class CartPageTest {
         driver.get("https://www.saucedemo.com/inventory.html");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("standard_user","secret_sauce");
-
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        productsPage = new ProductsPage(driver);
     }
 
     @Test
     public void verifyCartMenuIsRedirectCorrectly() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        ProductsPage productsPage = new ProductsPage(driver);
-
         // Espera a que el botón del menú del carrito sea visible y clickeable
         WebElement shoppyCartMenu = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getShoppyCartMenu()));
         shoppyCartMenu.click();
@@ -56,8 +56,11 @@ public class CartPageTest {
 
     @Test
     public void buyProcessIsSuccesfull() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        ProductsPage productsPage = new ProductsPage(driver);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+
+        //SELECCIONAR UNO DE LA CASE DEL BOTON DEL CART
+        productsPage.getAddToCartBtn().click();
 
         // Espera a que el botón del menú del carrito sea visible y clickeable
         WebElement shoppyCartMenu = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getShoppyCartMenu()));

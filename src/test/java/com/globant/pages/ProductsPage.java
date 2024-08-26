@@ -4,8 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProductsPage {
+    private static final Logger log = LoggerFactory.getLogger(ProductsPage.class);
     WebDriver driver;
 
     public WebDriver getDriver() {
@@ -31,6 +34,17 @@ public class ProductsPage {
 
     @FindBy(css = "#shopping_cart_container > a")
     private WebElement shoppyCartMenu;
+
+    @FindBy(css = "#add-to-cart-sauce-labs-backpack")
+    private WebElement addToCartBtn;
+
+    public WebElement getAddToCartBtn() {
+        return addToCartBtn;
+    }
+
+    public void setAddToCartBtn(WebElement addToCartBtn) {
+        this.addToCartBtn = addToCartBtn;
+    }
 
     public WebElement getBurgerMenuBtn() {
         return this.burgerMenuBtn;
