@@ -4,8 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ProductsPage {
     WebDriver driver;
@@ -35,14 +33,24 @@ public class ProductsPage {
     private WebElement shoppyCartMenu;
 
     @FindBy(css = "#add-to-cart-sauce-labs-backpack")
-    private WebElement addToCartBtn;
+    private WebElement addToCartBtn1;
 
-    public WebElement getAddToCartBtn() {
-        return addToCartBtn;
+    @FindBy(css = "#add-to-cart-sauce-labs-bike-light")
+    private WebElement addToCartBtn2;
+
+    @FindBy(css = "#add-to-cart-sauce-labs-bolt-t-shirt")
+    private WebElement addToCartBtn3;
+
+    public WebElement getAddToCartBtn1() {
+        return addToCartBtn1;
     }
 
-    public void setAddToCartBtn(WebElement addToCartBtn) {
-        this.addToCartBtn = addToCartBtn;
+    public WebElement getAddToCartBtn2() {
+        return addToCartBtn2;
+    }
+
+    public WebElement getAddToCartBtn3() {
+        return addToCartBtn3;
     }
 
     public WebElement getBurgerMenuBtn() {

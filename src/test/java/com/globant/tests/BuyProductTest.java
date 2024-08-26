@@ -2,7 +2,6 @@ package com.globant.tests;
 
 import com.globant.pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,7 +16,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.logging.Logger;
 
-public class CartPageTest {
+public class BuyProductTest {
     private WebDriver driver = null;
     private CheckoutOnePage checkoutOnePage;
     private CartPage cartPage;
@@ -25,7 +24,7 @@ public class CartPageTest {
     private CheckoutCompletePage checkoutCompletePage;
     private ProductsPage productsPage;
 
-    private final Logger log = Logger.getLogger(String.valueOf(ProductsPageTest.class));
+    private final Logger log = Logger.getLogger(String.valueOf(LogoutTest.class));
 
     @BeforeTest
     public void beforeTest(){
@@ -60,7 +59,7 @@ public class CartPageTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
 
         //SELECCIONAR UNO DE LA CASE DEL BOTON DEL CART
-        productsPage.getAddToCartBtn().click();
+        productsPage.getAddToCartBtn1().click();
 
         // Espera a que el botón del menú del carrito sea visible y clickeable
         WebElement shoppyCartMenu = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getShoppyCartMenu()));
@@ -108,19 +107,6 @@ public class CartPageTest {
         String expectedMessage = "Thank you for your order!";
         Assert.assertEquals(currentMessage, expectedMessage);
     }
-
-    @Test
-    public void verifyBuyAProduct() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        ProductsPage productsPage = new ProductsPage(driver);
-
-        // Espera a que el botón del menú hamburguesa sea visible y clickeable
-        WebElement shoppingCartMenu = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getShoppyCartMenu()));
-        shoppingCartMenu.click();
-        log.info("SI SE CLICKEO");
-    }
-
-
 
     @AfterTest
     public void afterTest(){

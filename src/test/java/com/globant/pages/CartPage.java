@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class CartPage {
     WebDriver driver;
 
@@ -17,6 +19,12 @@ public class CartPage {
     @FindBy(id = "checkout")
     private WebElement checkoutBtn;
 
+    @FindBy(css = ".cart_button")
+    private List<WebElement> cartProductsRemoveBtns;
+
+    public List<WebElement> getCartProductsRemoveBtns() {
+        return cartProductsRemoveBtns;
+    }
 
     public WebElement getCheckoutBtn() {
         return this.checkoutBtn;
@@ -26,8 +34,13 @@ public class CartPage {
         this.checkoutBtn = checkoutBtn;
     }
 
-    public void clickCheckoutBtn(){
-        this.checkoutBtn.click();
+    public void removeAllProducts(){
+        for (WebElement button : cartProductsRemoveBtns) {
+            if (button.getAttribute("id").contains("remove-sauce-labs")) {
+                button.click();
+            }
+        }
+
     }
 
 }

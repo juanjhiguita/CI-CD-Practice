@@ -17,11 +17,11 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.logging.Logger;
 
-public class ProductsPageTest {
+public class LogoutTest {
 
     private WebDriver driver = null;
     private ProductsPage productsPage;
-    private final Logger log = Logger.getLogger(String.valueOf(ProductsPageTest.class));
+    private final Logger log = Logger.getLogger(String.valueOf(LogoutTest.class));
 
     @BeforeTest
     public void beforeTest(){
