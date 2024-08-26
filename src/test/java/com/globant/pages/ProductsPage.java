@@ -8,6 +8,14 @@ import org.openqa.selenium.support.PageFactory;
 public class ProductsPage {
     WebDriver driver;
 
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+    }
+
     // Inicializamos el driver
     public ProductsPage(WebDriver driver){
         this.driver = driver;
@@ -21,16 +29,24 @@ public class ProductsPage {
     @FindBy(css = "[data-test='logout-sidebar-link']")
     private WebElement logoutSidebarLink;
 
+    @FindBy(css = "#shopping_cart_container > a")
+    private WebElement shoppyCartMenu;
+
     public WebElement getBurgerMenuBtn() {
-        return burgerMenuBtn;
+        return this.burgerMenuBtn;
     }
 
     public void setBurgerMenuBtn(WebElement burgerMenuBtn) {
         this.burgerMenuBtn = burgerMenuBtn;
     }
 
+    public WebElement getShoppyCartMenu() {
+        return this.shoppyCartMenu;
+    }
+
+
     public WebElement getLogoutSidebarLink() {
-        return logoutSidebarLink;
+        return this.logoutSidebarLink;
     }
 
     public void setLogoutSidebarLink(WebElement logoutSidebarLink) {
@@ -41,12 +57,12 @@ public class ProductsPage {
         this.burgerMenuBtn.click();
     }
 
+
     public void clickLogout(){
         this.logoutSidebarLink.click();
     }
 
-    // Verificar que se haya devuelto al login
-    public void logout(){
-        clickBurguerMenu();
+    public void clickShoppyCartMenu(){
+        this.shoppyCartMenu.click();
     }
 }

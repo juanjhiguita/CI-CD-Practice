@@ -19,10 +19,9 @@ import java.util.logging.Logger;
 
 public class ProductsPageTest {
 
-    WebDriver driver = null;
-    ProductsPage productsPage;
-    LoginPage loginPage;
-    Logger log = Logger.getLogger(String.valueOf(ProductsPageTest.class));
+    private WebDriver driver = null;
+    private ProductsPage productsPage;
+    private final Logger log = Logger.getLogger(String.valueOf(ProductsPageTest.class));
 
     @BeforeTest
     public void beforeTest(){
@@ -31,7 +30,7 @@ public class ProductsPageTest {
         options.addArguments("--start-maximized");
         driver = new ChromeDriver(options);
         driver.get("https://www.saucedemo.com/inventory.html");
-        loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         loginPage.login("standard_user","secret_sauce");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
@@ -40,11 +39,10 @@ public class ProductsPageTest {
     public void verifyLogoutRedirectLogin() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         productsPage = new ProductsPage(driver);
-        productsPage.clickBurguerMenu();
 
         // Espera a que el botón del menú hamburguesa sea visible y clickeable
         WebElement burgerMenuBtn = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getBurgerMenuBtn()));
-
+        burgerMenuBtn.click();
         // Espera a que el enlace de logout sea visible y clickeable
         WebElement logoutSidebarLink = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getLogoutSidebarLink()));
         logoutSidebarLink.click();
@@ -55,6 +53,17 @@ public class ProductsPageTest {
         Assert.assertEquals(currentUrlPage, "https://www.saucedemo.com/");
 
 
+    }
+
+    @Test
+    public void verifyBuyAProduct() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        productsPage = new ProductsPage(driver);
+
+        // Espera a que el botón del menú hamburguesa sea visible y clickeable
+        WebElement shoppingCartMenu = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getShoppyCartMenu()));
+        shoppingCartMenu.click();
+        log.info("SI SE CLICKEO");
     }
 
 
