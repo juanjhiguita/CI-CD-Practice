@@ -21,8 +21,8 @@ public class BuyProductTest {
     private CheckoutOnePage checkoutOnePage;
     private CartPage cartPage;
     private CheckoutTwoPage checkoutTwoPage;
-    private CheckoutCompletePage checkoutCompletePage;
     private ProductsPage productsPage;
+    private CheckoutCompletePage checkoutCompletePage;
 
     private final Logger log = Logger.getLogger(String.valueOf(LogoutTest.class));
 
@@ -35,41 +35,58 @@ public class BuyProductTest {
         driver.get("https://www.saucedemo.com/inventory.html");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("standard_user","secret_sauce");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         productsPage = new ProductsPage(driver);
     }
 
     @Test
-    public void verifyCartMenuIsRedirectCorrectly() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    public void verifyProductsPageResourceAreLoaded() throws InterruptedException{
         // Espera a que el botón del menú del carrito sea visible y clickeable
-        WebElement shoppyCartMenu = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getShoppyCartMenu()));
-        shoppyCartMenu.click();
-
-        String currentUrlPage = driver.getCurrentUrl();
-        String expectedUrl = "https://www.saucedemo.com/cart.html";
-        log.info(expectedUrl);
-        log.info("Current URL: " + currentUrlPage);
-        Assert.assertEquals(currentUrlPage, expectedUrl);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeClickable(productsPage.getShoppyCartMenu()));
     }
 
     @Test
-    public void buyProcessIsSuccesfull() throws InterruptedException {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-
-        //SELECCIONAR UNO DE LA CASE DEL BOTON DEL CART
-        productsPage.getAddToCartBtn1().click();
-
+    public void verifyCartMenuIsRedirectCorrectly() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         // Espera a que el botón del menú del carrito sea visible y clickeable
         WebElement shoppyCartMenu = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getShoppyCartMenu()));
         shoppyCartMenu.click();
-
+        String expectedUrl = "https://www.saucedemo.com/cart.html";
+        verifyCurrentUrl(expectedUrl);
         cartPage = new CartPage(driver);
+    }
+
+    @Test
+    public void verifyCartPageResourceAreLoaded() throws InterruptedException{
+        // Espera a que el botón del menú del carrito sea visible y clickeable
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(cartPage.getCheckoutBtn()));
+    }
+
+    @Test
+    public void verifyCheckoutOnePageIsRedirectCorrectly() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        // Espera a que el botón del menú del carrito sea visible y clickeable
         WebElement checkoutBtn = wait.until(ExpectedConditions.elementToBeClickable(cartPage.getCheckoutBtn()));
         checkoutBtn.click();
-
+        String expectedUrl = "https://www.saucedemo.com/checkout-step-one.html";
+        verifyCurrentUrl(expectedUrl);
         checkoutOnePage = new CheckoutOnePage(driver);
+    }
+
+    @Test
+    public void verifyCheckoutOnePageResourcesAreLoaded() throws InterruptedException{
+        // Espera a que el botón del menú del carrito sea visible y clickeable
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(checkoutOnePage.getFirstNameField()));
+        wait.until(ExpectedConditions.visibilityOf(checkoutOnePage.getLastNameField()));
+        wait.until(ExpectedConditions.visibilityOf(checkoutOnePage.getPostalCodeField()));
+        wait.until(ExpectedConditions.visibilityOf(checkoutOnePage.getContinueBtn()));
+    }
+
+    public void fillBasicFieldsCorrectly() throws InterruptedException{
+        // Espera a que el botón del menú del carrito sea visible y clickeable
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         // Llenar el formulario
         String firstName = "juan";
         String lastName = "sanchez";
@@ -81,36 +98,49 @@ public class BuyProductTest {
         lastNameField.sendKeys(lastName);
         WebElement postalCodeField = wait.until(ExpectedConditions.elementToBeClickable(checkoutOnePage.getPostalCodeField()));
         postalCodeField.sendKeys(postalCode);
+    }
 
+    @Test
+    public void verifyCheckoutTwoPageIsRedirectCorrectly() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        fillBasicFieldsCorrectly();
+        // Espera a que el botón del menú del carrito sea visible y clickeable
         WebElement continueBtn = wait.until(ExpectedConditions.elementToBeClickable(checkoutOnePage.getContinueBtn()));
         continueBtn.click();
 
+        String currentUrlPage = driver.getCurrentUrl();
+        String expectedUrl = "https://www.saucedemo.com/checkout-step-two.html";
+        verifyCurrentUrl(expectedUrl);
         checkoutTwoPage = new CheckoutTwoPage(driver);
-        // Espera a que el botón del menú hamburguesa sea visible y clickeable
+    }
+
+    @Test
+    public void verifyLoadedAndCompleteFinishBuy() throws InterruptedException{
+        // Espera a que el botón del menú del carrito sea visible y clickeable
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement finishBtn = wait.until(ExpectedConditions.elementToBeClickable(checkoutTwoPage.getFinishBtn()));
         finishBtn.click();
-
         checkoutCompletePage = new CheckoutCompletePage(driver);
 
         // VERIFICAR QUE SI ESTE EN LA URL
-        String currentUrlPage = driver.getCurrentUrl();
         String expectedUrl = "https://www.saucedemo.com/checkout-complete.html";
-        log.info("Expected URL: " + expectedUrl);
-        log.info("Current URL: " + currentUrlPage);
-        Assert.assertEquals(currentUrlPage, expectedUrl);
+        verifyCurrentUrl(expectedUrl);
 
-        // VERIFICAR QUE EN LA PAGINA APAREZCA EL MENSAJE
-        WebElement completeMessage = wait.until(ExpectedConditions.visibilityOf(checkoutCompletePage.getCompleteMessage()));
-
-
-        String currentMessage = completeMessage.getText();
+        WebElement currentMessageWE = wait.until(ExpectedConditions.elementToBeClickable(checkoutCompletePage.getCompleteMessage()));
         String expectedMessage = "Thank you for your order!";
-        Assert.assertEquals(currentMessage, expectedMessage);
+        Assert.assertEquals(currentMessageWE.getText(), expectedMessage);
     }
 
     @AfterTest
     public void afterTest(){
         driver.quit();
         log.info("Cerro el navegador");
+    }
+
+    private void verifyCurrentUrl(String expectedUrl) {
+        String currentUrl = driver.getCurrentUrl();
+        log.info("Expected URL: " + expectedUrl);
+        log.info("Current URL: " + currentUrl);
+        Assert.assertEquals(currentUrl, expectedUrl);
     }
 }

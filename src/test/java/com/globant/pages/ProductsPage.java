@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class ProductsPage {
-    WebDriver driver;
+    private WebDriver driver;
 
     public WebDriver getDriver() {
         return driver;

@@ -51,22 +51,7 @@ public class LogoutTest {
         log.info("Expected URL: " + "https://www.saucedemo.com/");
         log.info("Current URL: " + currentUrlPage);
         Assert.assertEquals(currentUrlPage, "https://www.saucedemo.com/");
-
-
     }
-
-    @Test
-    public void verifyBuyAProduct() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        productsPage = new ProductsPage(driver);
-
-        // Espera a que el botón del menú hamburguesa sea visible y clickeable
-        WebElement shoppingCartMenu = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getShoppyCartMenu()));
-        shoppingCartMenu.click();
-        log.info("SI SE CLICKEO");
-    }
-
-
 
     @AfterTest
     public void afterTest(){

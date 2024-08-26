@@ -37,26 +37,36 @@ public class DeleteProductsTest {
         loginPage.login("standard_user","secret_sauce");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         productsPage = new ProductsPage(driver);
+
+
     }
 
     @Test
     public void deleteProcessIsSuccesfull() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
 
-        //SELECCIONAR UNO DE LA CASE DEL BOTON DEL CART
-        productsPage.getAddToCartBtn1().click();
-        productsPage.getAddToCartBtn2().click();
-        productsPage.getAddToCartBtn3().click();
+        //SE AGREGAN LOS TRES PRODUCTOS AL CARRITO
 
-        // Espera a que el botón del menú del carrito sea visible y clickeable
+        WebElement addToCartBtn1 = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getAddToCartBtn1()));
+        addToCartBtn1.click();
+        WebElement addToCartBtn2 = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getAddToCartBtn2()));
+        addToCartBtn2.click();
+        WebElement addToCartBtn3 = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getAddToCartBtn3()));
+        addToCartBtn3.click();
+
+
+        // SE ABRE EL CARRITO
         WebElement shoppyCartMenu = wait.until(ExpectedConditions.elementToBeClickable(productsPage.getShoppyCartMenu()));
         shoppyCartMenu.click();
 
-        // Se remueven todos los productos
         cartPage = new CartPage(driver);
+        // SE VERIFICA QUE SI SE HAYAN AGREGADO 3 PRODUCTOS ANTES DE ELIMINARLOS
+        Assert.assertEquals(3,cartPage.getCartProductsRemoveBtns().size());
+
+        // SE REMUEVEN LOS PRODUCTOS DEL CARRITO
         cartPage.removeAllProducts();
 
-        // Se verifica que se eliminaron
+        // SE VERIFICA QUE SI SE HAYA ELIMINADO
         Assert.assertEquals(0,cartPage.getCartProductsRemoveBtns().size());
 
     }

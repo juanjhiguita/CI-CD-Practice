@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class CheckoutOnePage {
-    WebDriver driver;
+    private WebDriver driver;
 
     // Inicializamos el driver
     public CheckoutOnePage(WebDriver driver){
@@ -27,7 +27,7 @@ public class CheckoutOnePage {
     private WebElement continueBtn;
 
     public WebElement getFirstNameField() {
-        return firstNameField;
+        return this.firstNameField;
     }
 
     public void setFirstNameField(WebElement firstNameField) {
@@ -35,7 +35,7 @@ public class CheckoutOnePage {
     }
 
     public WebElement getLastNameField() {
-        return lastNameField;
+        return this.lastNameField;
     }
 
     public void setLastNameField(WebElement lastNameField) {
@@ -43,7 +43,7 @@ public class CheckoutOnePage {
     }
 
     public WebElement getPostalCodeField() {
-        return postalCodeField;
+        return this.postalCodeField;
     }
 
     public void setPostalCodeField(WebElement postalCodeField) {
@@ -51,7 +51,7 @@ public class CheckoutOnePage {
     }
 
     public WebElement getContinueBtn() {
-        return continueBtn;
+        return this.continueBtn;
     }
 
     public void setContinueBtn(WebElement continueBtn) {

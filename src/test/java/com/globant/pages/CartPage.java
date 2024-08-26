@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class CartPage {
-    WebDriver driver;
+    private WebDriver driver;
 
     // Inicializamos el driver
     public CartPage(WebDriver driver){
@@ -23,7 +23,7 @@ public class CartPage {
     private List<WebElement> cartProductsRemoveBtns;
 
     public List<WebElement> getCartProductsRemoveBtns() {
-        return cartProductsRemoveBtns;
+        return this.cartProductsRemoveBtns;
     }
 
     public WebElement getCheckoutBtn() {
@@ -35,7 +35,7 @@ public class CartPage {
     }
 
     public void removeAllProducts(){
-        for (WebElement button : cartProductsRemoveBtns) {
+        for (WebElement button : this.cartProductsRemoveBtns) {
             if (button.getAttribute("id").contains("remove-sauce-labs")) {
                 button.click();
             }

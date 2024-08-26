@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 
-    WebDriver driver;
+    private WebDriver driver;
 
     // Inicializamos el driver
     public LoginPage(WebDriver driver){
@@ -24,6 +24,18 @@ public class LoginPage {
 
     @FindBy(xpath = "//*[@id=\"login-button\"]")
     private WebElement loginBtn;
+
+    public WebElement getUsernameTxt() {
+        return usernameTxt;
+    }
+
+    public WebElement getPasswordTxt() {
+        return passwordTxt;
+    }
+
+    public WebElement getLoginBtn() {
+        return loginBtn;
+    }
 
     public void setUsername(String username){
         this.usernameTxt.sendKeys(username);

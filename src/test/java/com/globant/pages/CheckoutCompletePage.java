@@ -6,35 +6,17 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class CheckoutCompletePage {
-    WebDriver driver;
+    private WebDriver driver;
     public CheckoutCompletePage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }
 
-    public WebElement getBackHomeBtn() {
-        return backHomeBtn;
-    }
-
-    public void setBackHomeBtn(WebElement backHomeBtn) {
-        this.backHomeBtn = backHomeBtn;
-    }
-
-    @FindBy(id = "back-to-products")
-    private WebElement backHomeBtn;
-
-    @FindBy(className = "complete-header")
+    @FindBy(css = "#checkout_complete_container > h2")
     private WebElement completeMessage;
 
     public WebElement getCompleteMessage() {
-        return completeMessage;
+        return this.completeMessage;
     }
 
-    public void setCompleteMessage(WebElement completeMessage) {
-        this.completeMessage = completeMessage;
-    }
-
-    public void clickBackHomeBtn(){
-        this.backHomeBtn.click();
-    }
 }
