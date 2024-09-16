@@ -99,10 +99,10 @@ public class BuyProductTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         // Fill the formulary
         WebElement fistNameField = wait.until(ExpectedConditions.elementToBeClickable(checkoutOnePage.getFirstNameField()));
-        fistNameField.sendKeys(firstName);
         WebElement lastNameField = wait.until(ExpectedConditions.elementToBeClickable(checkoutOnePage.getLastNameField()));
-        lastNameField.sendKeys(lastName);
         WebElement postalCodeField = wait.until(ExpectedConditions.elementToBeClickable(checkoutOnePage.getPostalCodeField()));
+        fistNameField.sendKeys(firstName);
+        lastNameField.sendKeys(lastName);
         postalCodeField.sendKeys(postalCode);
 
         WebElement continueBtn = wait.until(ExpectedConditions.elementToBeClickable(checkoutOnePage.getContinueBtn()));

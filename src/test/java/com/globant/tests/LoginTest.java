@@ -38,7 +38,7 @@ public class LoginTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(loginPage.getUsernameTxt()));
         wait.until(ExpectedConditions.visibilityOf(loginPage.getPasswordTxt()));
-        wait.until(ExpectedConditions.visibilityOf(loginPage.getLoginBtn()));
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.getLoginBtn()));
         log.info("Test Finish");
     }
 
@@ -47,6 +47,10 @@ public class LoginTest {
     public void verifySuccesfulLogin(String username, String password){
         log.info("Test Start");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.getUsernameTxt()));
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.getPasswordTxt()));
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.getLoginBtn()));
+
         loginPage.setUsername(username);
         loginPage.setPassword("secret_sauce");
         loginPage.clickLogin();
