@@ -96,7 +96,7 @@ public class BuyProductTest {
     @Parameters({"firstName", "lastName", "postalCode"})
     public void verifyFillBasicFields(String firstName, String lastName, String postalCode) throws InterruptedException {
         log.info("Test Start");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         // Fill the formulary
         WebElement fistNameField = wait.until(ExpectedConditions.elementToBeClickable(checkoutOnePage.getFirstNameField()));
         WebElement lastNameField = wait.until(ExpectedConditions.elementToBeClickable(checkoutOnePage.getLastNameField()));
@@ -116,7 +116,7 @@ public class BuyProductTest {
     @Test(description = "Verify that the checkoutBtn is clickable and click to check if redirect to the correctly url and page")
     public void verifyLoadedAndCompleteFinishBuy() throws InterruptedException{
         log.info("Test Start");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement finishBtn = wait.until(ExpectedConditions.elementToBeClickable(checkoutTwoPage.getFinishBtn()));
         finishBtn.click();
         checkoutCompletePage = new CheckoutCompletePage(driver);

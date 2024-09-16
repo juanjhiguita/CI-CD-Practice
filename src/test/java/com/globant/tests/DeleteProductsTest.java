@@ -35,7 +35,6 @@ public class DeleteProductsTest {
         driver.get("https://www.saucedemo.com/inventory.html");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("standard_user","secret_sauce");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         productsPage = new ProductsPage(driver);
 
 

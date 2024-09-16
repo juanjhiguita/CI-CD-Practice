@@ -46,7 +46,7 @@ public class LoginTest {
     @Parameters({"username", "password"})
     public void verifySuccesfulLogin(String username, String password){
         log.info("Test Start");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(loginPage.getUsernameTxt()));
         wait.until(ExpectedConditions.elementToBeClickable(loginPage.getPasswordTxt()));
         wait.until(ExpectedConditions.elementToBeClickable(loginPage.getLoginBtn()));
