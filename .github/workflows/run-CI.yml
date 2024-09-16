@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'refinement'
   pull_request:
     branches:
       - 'main'
